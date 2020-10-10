@@ -2,7 +2,16 @@ class Api::V1::TasksController < ApplicationController
 
   def index
     tasks = Task.all 
-    render json: tasks
+    # render json: tasks
+    render json: TaskSerializer.new(tasks)
+
+    # options = {
+    #   # inlcude associated project
+    #   include: [:project]
+    # }
+    # to add a relationship in serializer
+    # render json: ProjectSerializer.new(tasks, options)
+
   end
 
   def create 
@@ -12,14 +21,11 @@ class Api::V1::TasksController < ApplicationController
     else 
       render json: {errors: task.errors.full_messages}, status: :unprocessable_entity
     end
-  end
-end
+  end 
 
-
-  end
-
+private
   def task_params 
     params.require(:task).permit(:title, :deadline, :completed, :project_id)
   end
 
- end
+end

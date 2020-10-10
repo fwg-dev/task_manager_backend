@@ -12,5 +12,5 @@ Task.destroy_all
 event_management = Project.create(name:"Event Management")
 design_conference = Project.create(name:"Design Conference")
 
-Task.create(title: "Finalize Budget", deadline: "Mon, 21 Oct 2020", completion: false, project_id: event_management.id)
-Task.create(title: "Confirm Sponsorship", deadline: "Mon, 28 Oct 2020", completion: true, project_id: design_conference.id)
+Task.create(title: "Finalize Budget", deadline: "Mon, 21 Oct 2020", completed: false, project_id: event_management.id)
+Task.create(title: "Confirm Sponsorship", deadline: "Mon, 28 Oct 2020", completed: true, project_id: design_conference.id)
