@@ -15,9 +15,12 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def create 
-    task = task.new(task_params)
+    task = Task.new(task_params)
+    # byebug
     if task.save
-      render json: task, status: :accepted
+      render json: TaskSerializer.new(task), status: :accepted
+      # render json: task, status: :accepted
+
     else 
       render json: {errors: task.errors.full_messages}, status: :unprocessable_entity
     end
@@ -25,7 +28,7 @@ class Api::V1::TasksController < ApplicationController
 
 private
   def task_params 
-    params.require(:task).permit(:title, :deadline, :completed, :project_id)
+    params.require(:task).permit(:title, :deadline, :creator, :completed, :project_id)
   end
 
 end
